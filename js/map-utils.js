@@ -3,6 +3,7 @@ var check = require('./type-check.js');
 var UNITS = require('./dimensions.js').UNITS;
 var QUIESCE_TIMEOUT = 500;
 var SCALE_UNITS = ['metric', 'imperial', 'nautical'];
+var cookie = require('cookie')
 
 function isValidScaleObject(value) {
     if (!check.isObject(value)) return false;
@@ -95,7 +96,18 @@ function createPrintMap(map, mapboxgl, container) {
                 pitch: map.getPitch(),
                 interactive: false,
                 attributionControl: false,
-                preserveDrawingBuffer: true
+                preserveDrawingBuffer: true,
+                transformRequest: (url, resourceType) => {
+                    if (resourceType === 'Tile' && url.startsWith(this.$store.getters.value('host'))) {
+                        return {
+                            url: url,
+                            credentials: 'same-origin',
+                            headers: {
+                                'Authorization': 'JWT ' + cookie.parse(document.cookie).access
+                            }
+                        }
+                    }
+                }
             });
             renderMap.fitBounds(map.getBounds());
 
