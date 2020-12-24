@@ -98,7 +98,7 @@ function createPrintMap(map, mapboxgl, container) {
                 attributionControl: false,
                 preserveDrawingBuffer: true,
                 transformRequest: (url, resourceType) => {
-                    if (resourceType === 'Tile' && url.startsWith(this.$store.getters.value('host'))) {
+                    if (resourceType === 'Tile') {
                         return {
                             url: url,
                             credentials: 'same-origin',
