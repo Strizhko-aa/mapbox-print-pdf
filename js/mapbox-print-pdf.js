@@ -92,6 +92,7 @@ var PdfBuilder = (function() {
                 
                 var writeCanvasToPdf = function(canvas) {
                     var renderFormat = getRenderFormat(format, orientation, convMargins);
+                    console.log(convMargins.left())
                     try { // convMargins.left(), convMargins.top()
                         pdf.addImage(canvas.toDataURL('image/jpeg', 1), 'JPEG', 500, 500,
                             renderFormat.width(),
