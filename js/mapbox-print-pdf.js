@@ -94,7 +94,7 @@ var PdfBuilder = (function() {
                     var renderFormat = getRenderFormat(format, orientation, convMargins);
                     console.log(convMargins.left())
                     try { // convMargins.left(), convMargins.top()
-                        pdf.addImage(canvas.toDataURL('image/jpeg', 1), 'JPEG', 500, 500,
+                        pdf.addImage(canvas.toDataURL('image/jpeg', 1), 'JPEG', convMargins.left(), convMargins.top(),
                             renderFormat.width(),
                             renderFormat.height(), null, 'FAST');
                         resolve(pdf);
