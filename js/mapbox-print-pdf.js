@@ -60,7 +60,7 @@ var PdfBuilder = (function() {
         var scale = null;
         var css = [];
         var actualPixelRatio = -1;
-        var margins = Margin.createPDFMargin(0, UNITS.Points);
+        var margins = Margin.createPDFMargin(0, UNITS.Pixels);
         var that = this;
 
         var _cleanup = function(map) {
@@ -94,7 +94,7 @@ var PdfBuilder = (function() {
                     var renderFormat = getRenderFormat(format, orientation, convMargins);
                     try { // convMargins.left(), convMargins.top()
                         console.log(dimensions.width())
-                        pdf.addImage(canvas.toDataURL('image/jpeg', 1), 'JPEG', convMargins.left(), convMargins.top(),
+                        pdf.addImage(canvas.toDataURL('image/jpeg', 1), 'JPEG', renderFormat.width() / 2, renderFormat.height() / 2,
                             renderFormat.width(),
                             renderFormat.height(), null, 'FAST');
                         resolve(pdf);
